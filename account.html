@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Account – AquaTrack</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { background: #eef4fb; margin: 0; font-family: Arial, sans-serif; min-height: 100vh; }
+
+.acc-wrap {
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 0 24px 60px;
+}
+
+.acc-hero {
+  background: linear-gradient(135deg, #023e8a 0%, #0077b6 60%, #00b4d8 100%);
+  border-radius: 20px;
+  padding: 36px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 32px rgba(0,119,182,0.18);
+  position: relative;
+  overflow: hidden;
+}
+.acc-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.acc-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; font-weight: 800; color: white;
+  border: 3px solid rgba(255,255,255,0.35);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+.acc-hero-info h2 { margin: 0 0 5px; font-size: 24px; font-weight: 800; }
+.acc-hero-info p  { margin: 0; font-size: 13.5px; opacity: 0.82; }
+.acc-hero-badge {
+  margin-left: auto;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.info-cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.info-card {
+  flex: 1;
+  min-width: 200px;
+  background: white;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+  border-top: 4px solid #0077b6;
+}
+.info-card .ic-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.info-card .ic-val   { font-size: 18px; font-weight: 700; color: #023e8a; word-break: break-all; }
+.info-card .ic-icon  { font-size: 22px; margin-bottom: 8px; }
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #b0b8c9;
+  margin: 0 0 14px;
+}
+
+.history-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.history-card .hc-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.history-card .hc-header h3 { margin: 0; font-size: 14px; color: #023e8a; }
+.badge-count {
+  background: #e63946;
+  color: white;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.history-empty {
+  padding: 40px;
+  text-align: center;
+  color: #b0b8c9;
+  font-size: 14px;
+}
+.history-empty span { font-size: 32px; display: block; margin-bottom: 10px; }
+
+.alert-row {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f8fafc;
+  gap: 14px;
+  transition: background 0.15s;
+}
+.alert-row:hover { background: #fafcff; }
+.alert-row:last-child { border-bottom: none; }
+.alert-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #e63946; flex-shrink: 0;
+}
+.alert-dot.gasket { background: #c1121f; }
+.alert-info { flex: 1; }
+.alert-info .a-title { font-size: 13.5px; font-weight: 700; color: #023e8a; margin-bottom: 2px; }
+.alert-info .a-sub   { font-size: 12px; color: #999; }
+.alert-time { font-size: 12px; color: #b0b8c9; font-weight: 600; flex-shrink: 0; }
+
+.signout-btn {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #e63946;
+  border: 2px solid #e63946;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.signout-btn:hover {
+  background: #e63946;
+  color: white;
+}
+
+.not-signed-in {
+  text-align: center;
+  padding: 80px 40px;
+  color: #666;
+}
+.not-signed-in span { font-size: 48px; display: block; margin-bottom: 16px; }
+.not-signed-in h3   { color: #023e8a; margin: 0 0 10px; font-size: 20px; }
+.not-signed-in p    { margin: 0 0 24px; font-size: 14px; color: #999; }
+.go-home-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: #0077b6;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+<header><nav><h1>AquaTrack</h1><ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="monitor.html">Monitor</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="account.html" id="navAccountLink">My Account</a></li>
+</ul></nav></header>
+
+<div class="acc-wrap" id="mainContent">
+  <!-- Filled by JS -->
+</div>
+
+<script>
+const BASE = "http://127.0.0.1:5000";
+
+async function loadAccount() {
+  const username = localStorage.getItem("aqUsername");
+  const phone    = localStorage.getItem("aqPhone");
+  const content  = document.getElementById("mainContent");
+
+  if (!username || !phone) {
+    // Not signed in
+    content.innerHTML = `
+      <div class="not-signed-in">
+        <span>🔒</span>
+        <h3>You're not signed in</h3>
+        <p>Please sign in from the home page to view your account.</p>
+        <a href="index.html" class="go-home-btn">Go to Home</a>
+      </div>`;
+    return;
+  }
+
+  // Fetch leak history from backend
+  let history = [];
+  try {
+    const res  = await fetch(BASE + "/get-account");
+    const data = await res.json();
+    history = data.leak_history || [];
+  } catch(e) {
+    console.error("Could not load history:", e);
+  }
+
+  const initial = username.charAt(0).toUpperCase();
+
+  // Build history rows
+  let historyHTML = "";
+  if (history.length === 0) {
+    historyHTML = `<div class="history-empty"><span>✅</span>No leak alerts recorded yet.<br>Alerts will appear here when a leak is detected on the monitor.</div>`;
+  } else {
+    historyHTML = history.slice().reverse().map(h => `
+      <div class="alert-row">
+        <div class="alert-dot ${h.type === 'gasket' ? 'gasket' : ''}"></div>
+        <div class="alert-info">
+          <div class="a-title">Leak Detected — Flow Activity: ${h.flow}</div>
+          <div class="a-sub">Detected at t = ${h.time}s &nbsp;|&nbsp; Threshold exceeded</div>
+        </div>
+        <div class="alert-time">${h.timestamp}</div>
+      </div>`).join("");
+  }
+
+  content.innerHTML = `
+    <div class="acc-hero">
+      <div class="acc-avatar">${initial}</div>
+      <div class="acc-hero-info">
+        <h2>${username}</h2>
+        <p>Registered AquaTrack user &nbsp;•&nbsp; SMS alerts active</p>
+      </div>
+      <div class="acc-hero-badge">● ACTIVE</div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="ic-icon">👤</div>
+        <div class="ic-label">Username</div>
+        <div class="ic-val">${username}</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">📱</div>
+        <div class="ic-label">Phone Number</div>
+        <div class="ic-val">${phone}</div>
+      </div>
+      <div class="info-card" style="border-top-color:#e63946">
+        <div class="ic-icon">🚨</div>
+        <div class="ic-label">Total Leak Alerts</div>
+        <div class="ic-val" style="color:#e63946">${history.length}</div>
+      </div>
+    </div>
+
+    <p class="section-title">Leak Alert History</p>
+    <div class="history-card">
+      <div class="hc-header">
+        <h3>All Leak Events</h3>
+        ${history.length > 0 ? `<span class="badge-count">${history.length} alerts</span>` : ''}
+      </div>
+      ${historyHTML}
+    </div>
+
+    <button class="signout-btn" onclick="signOut()">Sign Out</button>
+  `;
+}
+
+function signOut() {
+  if (!confirm("Are you sure you want to sign out?")) return;
+
+  // Clear local storage
+  localStorage.removeItem("aqUsername");
+  localStorage.removeItem("aqPhone");
+
+  // Tell backend to clear registered phone
+  fetch(BASE + "/signout", { method: "POST" })
+    .finally(() => {
+      alert("Signed out successfully!");
+      window.location.href = "index.html";
+    });
+}
+
+loadAccount();
+</script>
+</body>
+</html>
