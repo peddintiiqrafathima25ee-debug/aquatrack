@@ -28,7 +28,15 @@ def send_sms(to_number, message):
 # ── Flask App ─────────────────────────────────────────────────────────────────
 app = Flask(__name__)
 CORS(app)
+from flask import send_from_directory
 
+@app.route('/')
+def home():
+    return send_from_directory('.', 'index.html')
+
+@app.route('/<path:filename>')
+def serve_file(filename):
+    return send_from_directory('.', filename)
 # ════════════════════════════════════════════════════════════════════════════
 #  SIMULATION MODEL — Gasket Leak only
 #  1. Smooth baseline generated from real no-leak CSV RMS levels
