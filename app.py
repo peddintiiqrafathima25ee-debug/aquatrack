@@ -142,9 +142,7 @@ for key in WINDOWS:
     print(f"  {key}: {lk}/{N} windows = Leak Detected")
 
 # ── Routes ────────────────────────────────────────────────────────────────────
-@app.route("/")
-def home():
-    return "AquaTrack simulation backend running!"
+
 
 @app.route("/get-flow")
 def get_flow():
