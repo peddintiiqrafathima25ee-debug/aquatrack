@@ -4,3 +4,4 @@ pandas
 numpy
 twilio
 gunicorn
+python-dotenv
