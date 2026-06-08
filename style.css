@@ -158,3 +158,70 @@ h6{
     font-size: 12px;
   }
 }
+/* Make all elements responsive */
+* {
+    box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+
+    /* Reduce large headings */
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    /* Stack items vertically */
+    .container,
+    .row,
+    .cards,
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Full-width cards */
+    .card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Responsive navigation */
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Reduce padding */
+    section {
+        padding: 20px 15px;
+    }
+
+    /* Buttons */
+    button,
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
